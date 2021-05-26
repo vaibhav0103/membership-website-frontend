@@ -1,14 +1,32 @@
 import {useParams} from 'react-router-dom';
+import {useState, useEffect} from 'react';
+import API from '../api'
 
 const SingleCourse = () => {
-    const {courseId} = useParams()
+    const [course, setCourse] =useState([])
+    const {slug} = useParams()
+
+    const fetchCourse = () => {
+        API.get(`course/${slug}`)
+        .then((response)=>{
+            console.log(response.data);
+            setCourse(response.data)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }
+
+    useEffect(()=>{
+        fetchCourse()
+    }, [])
     return (
         <div className="container">
             
             <div className="row g-5">
                 <div className="col-md-8">
                     <h3 className="pb-4 mb-4 fst-italic border-bottom">
-                        From the Firehose Single Course Id : {courseId}
+                        From the Firehose Single Course Id : {slug}
                     </h3>
 
                     <article className="blog-post">

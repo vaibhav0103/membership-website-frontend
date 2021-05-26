@@ -33,7 +33,7 @@ ReactDOM.render(
         <Route path="/courses" >
           <Courses />
         </Route>
-        <Route path="/course/:courseId" >
+        <Route path="/course/:slug" >
           <SingleCourse />
         </Route>
         <Route path="/about" >
