@@ -49,8 +49,22 @@ header .logo{
   border-top-right-radius: 0;
 }
 
-
+/* Course */
 .course-thumbnail{
   width: 200px;
   height: 100%;
+}
+
+/* Lesson React Video Player */
+.player-wrapper {
+  position: relative;
+  /* padding: 10px; */
+  padding-top: 56.25%;
+}
+/* Player ratio: 100 / (1280 / 720) */
+
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
 }

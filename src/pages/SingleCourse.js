@@ -25,22 +25,16 @@ const SingleCourse = () => {
         fetchCourse()
     }, [])
     return (
-        <div className="container">
-            
+        <div className="container mb-2">
             <div className="row g-5">
-                <div className="col-md-8">
+                <div className="col-md-12">
                     <h3 className="pb-4 mb-4 fst-italic border-bottom">
                         {course.title}
                     </h3>
                     <p>
                         {course.description}
                     </p>
-                    
-                    {lessons.map((lesson)=>{
-                        return (
-                            <Lesson key={lesson.id} lesson={lesson} />
-                        )
-                    })}
+                    <Lesson lessons={lessons} />
                     
                 </div>
             </div>
