@@ -1,15 +1,49 @@
-import {useState, useEffect} from 'react'; 
-import inputFieldValues from '../components/InputFields';
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'; 
+import inputFieldValues from '../../components/InputFields';
+import { Link } from 'react-router-dom';
+import useAuth from './useAuth';
 
 const Signup = () => {
+
+    const { registerUser } = useAuth();
+
     const initialFormData = Object.freeze({
 		email: '',
 		username: '',
 		password: '',
+        formSubmitted: false,
+        success: false
 	});
     const [errors, setErrors] = useState({})
+    const [alerts, setAlerts] = useState({
+        isActive: false,
+        msg: []
+    })
     const [formData, setFormData] = useState(initialFormData)
+
+    // API request to register user
+    
+
+    const handleSuccess = () => {
+        setFormData({
+            ...initialFormData,
+            formSubmitted: true,
+            success: true
+        });
+        // setShowAlert(true);
+        console.log("Success Hai")
+    };
+
+    const handleError = () => {
+        setFormData({
+            ...initialFormData,
+            formSubmitted: true,
+            success: false
+        });
+        console.log("Here I am")
+    };
+
+
 
     const formIsValid = (fieldValues = formData) => {
         const isValid =
@@ -42,13 +76,13 @@ const Signup = () => {
             temp.password = fieldValues.password.length >= 8 ? "" : "Must have atleast 8 characters.";
         }
 
-        if ("confirmPassword" in fieldValues){
+        if ("password2" in fieldValues){
             
             if(formData.password){
-                console.log(formData.password, fieldValues.confirmPassword )
-                temp.confirmPassword = fieldValues.confirmPassword === formData.password ? "" : "Passwords do not match!";
+                console.log(formData.password, fieldValues.password2 )
+                temp.password2 = fieldValues.password2 === formData.password ? "" : "Passwords do not match!";
             } else{
-                temp.confirmPassword = fieldValues.confirmPassword.length < 1 ? "": "Enter a Password first";
+                temp.password2 = fieldValues.password2.length < 1 ? "": "Enter a Password first";
             }
         }
 
@@ -75,13 +109,23 @@ const Signup = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
+        const isValid = Object.values(errors).every((x) => x === "") && formIsValid();
+        if(isValid){
+            registerUser(formData , handleSuccess, handleError)
+        }
 
+        // e.target.reset();
     }
 
     return (
         <div className="container">
             <div className="row justify-content-center">
+                
                 <div className="col-sm-6">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                     <form noValidate>
                         <h3 className="text-primary text-center my-3">Sign Up</h3>
                         {/* Input Fields */}

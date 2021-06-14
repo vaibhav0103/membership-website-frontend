@@ -4,14 +4,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { AuthProvider } from './context';
 import App from './App';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Signup from './pages/Signup';
-import Login from './pages/Login';
+import Signup from './pages/auth/Signup';
+import Login from './pages/auth/Login';
+import Logout from './pages/auth/Logout';
 import Courses from './pages/Courses';
 import SingleCourse from './pages/SingleCourse';
 import About from './pages/About';
+import Dashboard from './pages/Dashboard';
+import PrivateRoute from './pages/PrivateRoute';
 
 import reportWebVitals from './reportWebVitals';
 
@@ -19,28 +23,37 @@ ReactDOM.render(
   <React.StrictMode>
 
     <Router>
-      <Header />
-      <Switch>
-        <Route exact path="/" >
-          <App />
-        </Route>
-        <Route path="/signup" >
-          <Signup />
-        </Route>
-        <Route path="/login" >
-          <Login />
-        </Route>
-        <Route path="/courses" >
-          <Courses />
-        </Route>
-        <Route path="/course/:slug" >
-          <SingleCourse />
-        </Route>
-        <Route path="/about" >
-          <About />
-        </Route>
-      </Switch>
-      <Footer />
+      <AuthProvider>
+        <Header />
+        <Switch>
+          <Route exact path="/" >
+            <App />
+          </Route>
+          <Route path="/signup" >
+            <Signup />
+          </Route>
+          <Route path="/login" >
+            <Login />
+          </Route>
+          <Route path="/logout" >
+            <Logout />
+          </Route>
+          <PrivateRoute path="/dashboard" >
+            <Dashboard />
+          </PrivateRoute>
+
+          <Route path="/courses" >
+            <Courses />
+          </Route>
+          <Route path="/course/:slug" >
+            <SingleCourse />
+          </Route>
+          <Route path="/about" >
+            <About />
+          </Route>
+        </Switch>
+        <Footer />
+      </AuthProvider>
     </Router>
     
   </React.StrictMode>,

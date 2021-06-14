@@ -1,8 +1,12 @@
+import { useEffect } from 'react';
 import heroImg from '../assets/images/Presentation.svg';
 import Testimonials from '../components/Testimonials';
 import Pricing from '../components/Pricing';
+import API from '../api.js';
+
 
 const Home = () => {
+    
     return (
         <>
         <div className="container">

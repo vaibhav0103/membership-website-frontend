@@ -18,10 +18,10 @@ const inputFieldValues = [
     id: "password",
   },
   {
-    name: "confirmPassword",
+    name: "password2",
     label: "Confirm Password",
     type: "password",
-    id: "confirmPassword",
+    id: "password2",
   },
 ];
 

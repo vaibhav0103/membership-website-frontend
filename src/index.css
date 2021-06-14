@@ -21,6 +21,26 @@ header .logo{
   height: auto;
 }
 
+/* .dropdown-menu .logout{
+  background-color: red;
+} */
+.profile-dropdown .dropdown-item{
+  color: #fff;
+}
+
+.profile-dropdown .dropdown-divider {
+  color: #fff;
+}
+
+.profile-dropdown .dropdown-item:focus, .profile-dropdown .dropdown-item:hover{
+  color: #fff;
+  background-color: black;
+}
+
+.logout .dropdown-item:focus, .logout .dropdown-item:hover {
+  background-color: #ff411b;
+}
+
 /* Login Form */
 .form-signin {
   width: 100%;
