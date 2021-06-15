@@ -5,11 +5,14 @@ import { useAuthContext } from '../context';
 
 const PrivateRoute = ({children, ...rest}) => {
 
-    const {isAuthenticated} = useAuthContext()
+    const {loggedIn, user} = useAuthContext()
+    console.log(user, loggedIn)
+    const isUser = loggedIn && user
+
 
     return (
         <Route {...rest} render={() => {
-            return isAuthenticated ? children : <Redirect to='/login'></Redirect>
+            return isUser ? children : <Redirect to='/login'></Redirect>
         }}>
 
     </Route>

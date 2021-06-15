@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import API from '../../api.js';
 import { useHistory } from 'react-router-dom';
+import { useAuthContext } from '../../context';
 
 const useAuth = () => {
 
     let history = useHistory();
-
+    const { userLoggedIn }  = useAuthContext();
     // LOGIN USER
     const loginUser = async (formData) => {
         
@@ -16,6 +17,7 @@ const useAuth = () => {
             localStorage.setItem('access_token', res.data.access);
             localStorage.setItem('refresh_token', res.data.refresh);
             API.defaults.headers['Authorization'] = 'JWT ' + localStorage.getItem('access_token');
+            userLoggedIn()
             history.push('/');
         })
     }

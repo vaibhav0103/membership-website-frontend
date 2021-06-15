@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import API from '../../api.js';
+import { useAuthContext } from '../../context';
 
 
 const Logout = () => {
 
     const history = useHistory();
+    const { userLoggedOut }  = useAuthContext();
 
     useEffect(() => {
 		const response = API.post('user/logout/', {
@@ -15,6 +17,7 @@ const Logout = () => {
 		localStorage.removeItem('access_token');
 		localStorage.removeItem('refresh_token');
 		API.defaults.headers['Authorization'] = null;
+        userLoggedOut()
 		history.push('/login');
 	});
 

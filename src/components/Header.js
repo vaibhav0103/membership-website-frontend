@@ -2,10 +2,12 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/images/download.svg';
 import Navbar from './Navbar';
 import { useAuthContext } from '../context';
+import { useEffect } from 'react';
 
 
 const Header = () => {
-    const { isAuthenticated }  = useAuthContext();
+    const { loggedIn }  = useAuthContext();
+    
     return (
         <div className="container">
             <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
@@ -15,7 +17,7 @@ const Header = () => {
                 <Navbar />
 
                 <div>
-                    { isAuthenticated ?                     
+                    { loggedIn ?                     
                     <div className="dropdown text-end">
                         <div className="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" className="rounded-circle" />Profile
