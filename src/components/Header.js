@@ -2,11 +2,12 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/images/download.svg';
 import Navbar from './Navbar';
 import { useAuthContext } from '../context';
-import { useEffect } from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserTie, faHouseUser, faListAlt, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
 
 const Header = () => {
-    const { loggedIn }  = useAuthContext();
+    const { loggedIn, user }  = useAuthContext();
     
     return (
         <div className="container">
@@ -19,14 +20,17 @@ const Header = () => {
                 <div>
                     { loggedIn ?                     
                     <div className="dropdown text-end">
-                        <div className="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" className="rounded-circle" />Profile
+                        <div className="d-block dropdown-toggle fw-bold text-primary" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                            {/* <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" className="rounded-circle" /> */}
+                            <FontAwesomeIcon icon={faUserTie} /> Profile
                         </div>
                         <ul className="dropdown-menu text-small text-center bg-dark profile-dropdown" aria-labelledby="dropdownUser">
-                            <li><Link to="/dashboard" className="dropdown-item">Dashboard</Link></li>
-                            <li><a className="dropdown-item" href="#">My Courses</a></li>
+                            <li className="greet-user"><span className="dropdown-item text-capitalize">Hi, {user.username}</span></li>
                             <li><hr className="dropdown-divider" /></li>
-                            <li className="logout"><Link to="/logout" className="dropdown-item">Logout</Link></li>
+                            <li><Link to="/dashboard" className="dropdown-item"><FontAwesomeIcon icon={faHouseUser} /> Dashboard</Link></li>
+                            <li><a className="dropdown-item" href="#"><FontAwesomeIcon icon={faListAlt} /> My Courses</a></li>
+                            <li><hr className="dropdown-divider" /></li>
+                            <li className="logout"><Link to="/logout" className="dropdown-item"><FontAwesomeIcon icon={faSignOutAlt} /> Logout</Link></li>
                         </ul>
                     </div>
                     : 

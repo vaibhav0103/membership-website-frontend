@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import API from './api.js';
 
 
@@ -10,15 +10,7 @@ const AuthProvider = ({children}) => {
     const [user, setUser] =  useState([])
     const [loggedIn, setLoggedIn] = useState(false)
     
-
-    const userLoggedOut = () => {
-        const isToken = localStorage.getItem('refresh_token')
-        if (isToken === null){
-            setLoggedIn(false)
-        }
-        
-    }
-
+    // Check user logged in or not
     const userLoggedIn = () => {
         const isToken = localStorage.getItem('refresh_token')
         if (isToken !== null){
@@ -28,9 +20,10 @@ const AuthProvider = ({children}) => {
         }
     }
 
+    // get user details
     const getUser = async () => {
-        await API.get('user/profile/').
-        then((res)=> {
+        await API.get('user/profile/')
+        .then((res)=> {
             console.log(res)
             // console.log(loggedIn)
             if(res.status===200){
@@ -43,6 +36,7 @@ const AuthProvider = ({children}) => {
 
     useEffect(()=>{
         userLoggedIn()
+        // getuser if logged in
         if(loggedIn){
             getUser()
         }
@@ -50,7 +44,7 @@ const AuthProvider = ({children}) => {
         
     },[loggedIn])
 
-    return <AuthContext.Provider value={{ loggedIn, userLoggedOut, userLoggedIn, user }}>{children}</AuthContext.Provider>
+    return <AuthContext.Provider value={{ loggedIn, userLoggedIn, user }}>{children}</AuthContext.Provider>
 }
 
 export const useAuthContext = () => {

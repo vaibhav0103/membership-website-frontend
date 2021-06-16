@@ -21,9 +21,11 @@ header .logo{
   height: auto;
 }
 
-/* .dropdown-menu .logout{
-  background-color: red;
-} */
+.profile-dropdown .greet-user .dropdown-item{
+  color: rgb(255, 230, 2);
+  pointer-events: none;
+}
+
 .profile-dropdown .dropdown-item{
   color: #fff;
 }

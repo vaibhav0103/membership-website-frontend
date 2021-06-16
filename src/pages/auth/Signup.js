@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'; 
+import { useState } from 'react'; 
 import inputFieldValues from '../../components/InputFields';
 import { Link } from 'react-router-dom';
 import useAuth from './useAuth';
@@ -15,10 +15,10 @@ const Signup = () => {
         success: false
 	});
     const [errors, setErrors] = useState({})
-    const [alerts, setAlerts] = useState({
-        isActive: false,
-        msg: []
-    })
+    // const [alerts, setAlerts] = useState({
+    //     isActive: false,
+    //     msg: []
+    // })
     const [formData, setFormData] = useState(initialFormData)
 
     // API request to register user

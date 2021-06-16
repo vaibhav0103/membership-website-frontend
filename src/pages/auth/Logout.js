@@ -7,7 +7,7 @@ import { useAuthContext } from '../../context';
 const Logout = () => {
 
     const history = useHistory();
-    const { userLoggedOut }  = useAuthContext();
+    const { userLoggedIn }  = useAuthContext();
 
     useEffect(() => {
 		const response = API.post('user/logout/', {
@@ -17,7 +17,7 @@ const Logout = () => {
 		localStorage.removeItem('access_token');
 		localStorage.removeItem('refresh_token');
 		API.defaults.headers['Authorization'] = null;
-        userLoggedOut()
+        userLoggedIn()
 		history.push('/login');
 	});
 
