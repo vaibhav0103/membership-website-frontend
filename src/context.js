@@ -9,10 +9,15 @@ const AuthProvider = ({children}) => {
 
     const [user, setUser] =  useState([])
     const [loggedIn, setLoggedIn] = useState(false)
+    const [loading, setLoading] = useState(true)
+    // const [isToken, setIsToken] = useState(localStorage.getItem('refresh_token'))
     
+    // console.log(isToken)
     // Check user logged in or not
     const userLoggedIn = () => {
         const isToken = localStorage.getItem('refresh_token')
+        // setIsToken(localStorage.getItem('refresh_token'))
+        // const isToken = 
         if (isToken !== null){
             setLoggedIn(true)
         } else {
@@ -28,11 +33,14 @@ const AuthProvider = ({children}) => {
             // console.log(loggedIn)
             if(res.status===200){
                 setUser(res.data)
+                setLoading(false)
             }
+        }).catch((err)=>{
+            console.log(err)
         })
     }
 
-    console.log("mid ", loggedIn)
+    console.log("Logged In context ", loggedIn)
 
     useEffect(()=>{
         userLoggedIn()
@@ -40,11 +48,10 @@ const AuthProvider = ({children}) => {
         if(loggedIn){
             getUser()
         }
-        console.log("Effect ", loggedIn)
         
     },[loggedIn])
 
-    return <AuthContext.Provider value={{ loggedIn, userLoggedIn, user }}>{children}</AuthContext.Provider>
+    return <AuthContext.Provider value={{ loggedIn, userLoggedIn, user, loading }}>{children}</AuthContext.Provider>
 }
 
 export const useAuthContext = () => {

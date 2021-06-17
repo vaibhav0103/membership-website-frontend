@@ -22,7 +22,7 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData)
+        // Call to login Api
         loginUser(formData)
 
     }

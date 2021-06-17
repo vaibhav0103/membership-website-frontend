@@ -28,7 +28,7 @@ const Header = () => {
                             <li className="greet-user"><span className="dropdown-item text-capitalize">Hi, {user.username}</span></li>
                             <li><hr className="dropdown-divider" /></li>
                             <li><Link to="/dashboard" className="dropdown-item"><FontAwesomeIcon icon={faHouseUser} /> Dashboard</Link></li>
-                            <li><a className="dropdown-item" href="#"><FontAwesomeIcon icon={faListAlt} /> My Courses</a></li>
+                            <li><a className="dropdown-item" href="/enrolled-courses"><FontAwesomeIcon icon={faListAlt} /> My Courses</a></li>
                             <li><hr className="dropdown-divider" /></li>
                             <li className="logout"><Link to="/logout" className="dropdown-item"><FontAwesomeIcon icon={faSignOutAlt} /> Logout</Link></li>
                         </ul>

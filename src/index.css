@@ -90,3 +90,16 @@ header .logo{
   top: 0;
   left: 0;
 }
+
+.content-wrapper {
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Footer */
+.footer{
+  position: absolute;
+  /* bottom: 0; */
+  left: 0;
+  right: 0
+}
