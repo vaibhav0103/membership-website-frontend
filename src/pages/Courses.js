@@ -27,6 +27,18 @@ const Courses = () => {
         })
     }
 
+    const enrollUser = (id) => {
+        console.log(id)
+        API.post('user/enroll/', {
+            'course_id': id
+        }).then((response)=>{
+            console.log(response);
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }
+
     useEffect(()=>{
         fetchCourses()
     }, [])
@@ -60,9 +72,9 @@ const Courses = () => {
                             </strong>
                             <p className="card-text mb-auto">{ course.description }</p>
                             <div className="text-center mt-2">
-                                <Link to={`/course/${course.slug}`} >
-                                    <button type="button" className="btn btn-success btn-lg">Enroll</button>
-                                </Link>
+                                {/* <Link to={`/course/${course.slug}`} > */}
+                                    <button type="button" className="btn btn-success btn-lg" onClick={()=>enrollUser(course.id)}>Enroll</button>
+                                {/* </Link> */}
                             </div>
                         </div>
                         <div className="col-auto d-none d-lg-block">
