@@ -10,18 +10,15 @@ const AuthProvider = ({children}) => {
     const [user, setUser] =  useState([])
     const [loggedIn, setLoggedIn] = useState(false)
     const [loading, setLoading] = useState(true)
-    // const [isToken, setIsToken] = useState(localStorage.getItem('refresh_token'))
-    
-    // console.log(isToken)
+
     // Check user logged in or not
     const userLoggedIn = () => {
-        const isToken = localStorage.getItem('refresh_token')
-        // setIsToken(localStorage.getItem('refresh_token'))
-        // const isToken = 
+        const isToken = localStorage.getItem('refresh_token');
+
         if (isToken !== null){
-            setLoggedIn(true)
+            setLoggedIn(true);
         } else {
-            setLoggedIn(false)
+            setLoggedIn(false);
         }
     }
 
@@ -29,24 +26,21 @@ const AuthProvider = ({children}) => {
     const getUser = async () => {
         await API.get('user/profile/')
         .then((res)=> {
-            console.log(res)
-            // console.log(loggedIn)
             if(res.status===200){
-                setUser(res.data)
-                setLoading(false)
+                setUser(res.data);
+                setLoading(false);
             }
         }).catch((err)=>{
             console.log(err)
+            setLoading(false);
         })
     }
 
-    console.log("Logged In context ", loggedIn)
-
     useEffect(()=>{
-        userLoggedIn()
+        userLoggedIn();
         // getuser if logged in
         if(loggedIn){
-            getUser()
+            getUser();
         }
         
     },[loggedIn])

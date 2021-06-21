@@ -1,7 +1,7 @@
 import {useParams} from 'react-router-dom';
 import {useState, useEffect} from 'react';
-import API from '../api';
-import Lesson from '../components/Lesson'
+import API from '../../api';
+import Lesson from '../../components/Lesson'
 
 const SingleCourse = () => {
     const [course, setCourse] = useState([])
